@@ -27,6 +27,21 @@ namespace GoldSavings.App.Services
         {
             return _goldPrices.OrderBy(p => p.Price).Take(3).Select(p => p.Price).ToList();
         }
+
+        public List<GoldPrice> GetLowestPrice2()
+        {
+            return _goldPrices.OrderBy(p => p.Price).Take(3).ToList();
+        }
+
+        public List<GoldPrice> GetHighestPrice2()
+        {
+            return _goldPrices.OrderByDescending(p => p.Price).Take(3).ToList();
+        }
+
+        public List<GoldPrice> GetTop13GoldPrices()
+        {
+            return _goldPrices.OrderByDescending(p => p.Price).Take(13).ToList();
+        }
         
         public double PercentageIncrease(double PurchasePrice, double sellPrice)
         {
