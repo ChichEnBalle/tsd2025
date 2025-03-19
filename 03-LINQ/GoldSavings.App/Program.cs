@@ -158,13 +158,12 @@ class Program
 
         Console.WriteLine("\nGold Analyis Queries with LINQ Completed.");
 
+        //Question 2.d
 
-        
-        //Question 2.e
-
-        Console.WriteLine("\nQuestion 2.e ");
+        Console.WriteLine("\nQuestion 2.d ");
 
         // Step 1: Get gold prices
+
         DateTime startDate2023 = new DateTime(2023,01,01);
         DateTime endDate2023 = new DateTime(2023,12,31);
         DateTime startDate2024 = new DateTime(2024,01,01);
@@ -173,7 +172,39 @@ class Program
         List<GoldPrice> goldPrices2023 = dataService.GetGoldPrices(startDate2023, endDate2023).GetAwaiter().GetResult();
         List<GoldPrice> goldPrices2024 = dataService.GetGoldPrices(startDate2024, endDate2024).GetAwaiter().GetResult();
 
-        int goldPrices2020to2024 = goldPrices2020.Count + goldPrices2021.Count + goldPrices2022.Count + goldPrices2023.Count + goldPrices2023.Count;
+        int goldPrices2020_2023_2024 = goldPrices2020.Count + goldPrices2023.Count + goldPrices2024.Count;
+
+        if (goldPrices2020_2023_2024 == 0)
+        {
+            Console.WriteLine("No data found. Exiting.");
+            return;
+        }
+
+        Console.WriteLine($"Retrieved {goldPrices2020_2023_2024} records. Ready for analysis.");
+
+        // Step 2: Perform analysis
+        GoldAnalysisService analysisService2023 = new GoldAnalysisService(goldPrices2023);
+        GoldAnalysisService analysisService2024 = new GoldAnalysisService(goldPrices2024);
+
+        var avgPrice2020 = analysisService2020.GetAveragePrice();
+        var avgPrice2023 = analysisService2023.GetAveragePrice();
+        var avgPrice2024 = analysisService2024.GetAveragePrice();
+
+        // Step 3: Print results
+        GoldResultPrinter.PrintSingleValue(Math.Round(avgPrice2020, 2), "Average Gold Price in 2020");
+        GoldResultPrinter.PrintSingleValue(Math.Round(avgPrice2023, 2), "Average Gold Price in 2023");
+        GoldResultPrinter.PrintSingleValue(Math.Round(avgPrice2024, 2), "Average Gold Price in 2024");
+
+        Console.WriteLine("\nGold Analyis Queries with LINQ Completed.");
+
+
+        //Question 2.e
+
+        Console.WriteLine("\nQuestion 2.e ");
+
+        // Step 1: Get gold prices
+
+        int goldPrices2020to2024 = goldPrices2020.Count + goldPrices2021.Count + goldPrices2022.Count + goldPrices2023.Count + goldPrices2024.Count;
 
         if (goldPrices2020to2024 == 0)
         {
@@ -184,10 +215,6 @@ class Program
         Console.WriteLine($"Retrieved {goldPrices2020to2024} records. Ready for analysis.");
 
         // Step 2: Perform analysis
-
-
-        GoldAnalysisService analysisService2023 = new GoldAnalysisService(goldPrices2023);
-        GoldAnalysisService analysisService2024 = new GoldAnalysisService(goldPrices2024);
 
         // Calcul of the lowest price between 2020 and 2024
         List<GoldPrice> lowestGoldPrices2020to2024 = new List<GoldPrice>();
