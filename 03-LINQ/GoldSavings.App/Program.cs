@@ -262,5 +262,26 @@ class Program
 
 
         Console.WriteLine("\nGold Analyis Queries with LINQ Completed.");
+
+        // Question 3 
+
+        Console.WriteLine("\nQuestion 2.e ");
+
+        string filePath = "top13GoldPrices2020to2022.xml";
+        analysisService2020.SavePricesToXml(filePath, top13GoldPrices2020to2022);
+
+        Console.WriteLine("\nTop 13 Gold prices between 2020 and 2022 have been saved to " + filePath);
+    
+        // Question 4
+
+        Console.WriteLine("\nQuestion 4 ");
+
+        List<GoldPrice> pricesFromXml = analysisService2020.ReadPricesFromXml(filePath);
+
+        Console.WriteLine("\nGold Prices read from XML:");
+        foreach (var price in pricesFromXml)
+        {
+            Console.WriteLine($"Price: {price.Price}, Date: {price.Date}");
+        }
     }
 }

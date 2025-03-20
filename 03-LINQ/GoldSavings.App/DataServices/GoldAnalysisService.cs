@@ -47,6 +47,16 @@ namespace GoldSavings.App.Services
         {
             return ((sellPrice - PurchasePrice) / PurchasePrice) * 100;
         }
-          
+
+        public void SavePricesToXml(string filePath, List<GoldPrice> prices)
+        {
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<GoldPrice>));
+            using (var writer = new System.IO.StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, prices);
+            }
+        }
+        
+        public List<GoldPrice> ReadPricesFromXml(string filePath) => (List<GoldPrice>)new System.Xml.Serialization.XmlSerializer(typeof(List<GoldPrice>)).Deserialize(new System.IO.StreamReader(filePath));
     }
 }
