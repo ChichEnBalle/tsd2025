@@ -9,6 +9,11 @@ class Program
     {
         Console.WriteLine("Hello, Gold Investor!");
 
+        // Task 1
+
+        Console.WriteLine("\n Task 1");
+
+
         // Step 1: Get gold prices
         GoldDataService dataService = new GoldDataService();
         DateTime startDate = new DateTime(2024,09,18);
@@ -286,6 +291,19 @@ class Program
         {
             Console.WriteLine($"Price: {price.Price}, Date: {price.Date}");
         }
+
+        // Task 2
+
+        Console.WriteLine("\n Task 2");
+
+        // Question 1 
+
+        Console.WriteLine("\nQuestion 1 ");
+
+        Func<int, bool> isLeapYear = year => (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+
+        int year = 2024;
+        Console.WriteLine($"{year} is a leap year: {isLeapYear(year)}");
 
     }
 }
