@@ -18,6 +18,7 @@ namespace GoldSavings.App.Services
             return _goldPrices.Average(p => p.Price);
         }
 
+
         public List<double> GetHighestPrice()
         {
             return _goldPrices.OrderByDescending(p => p.Price).Take(3).Select(p => p.Price).ToList();
@@ -58,5 +59,6 @@ namespace GoldSavings.App.Services
         }
         
         public List<GoldPrice> ReadPricesFromXml(string filePath) => (List<GoldPrice>)new System.Xml.Serialization.XmlSerializer(typeof(List<GoldPrice>)).Deserialize(new System.IO.StreamReader(filePath));
+
     }
 }

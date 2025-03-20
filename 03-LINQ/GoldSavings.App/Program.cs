@@ -15,6 +15,7 @@ class Program
         DateTime endDate = DateTime.Now;
         List<GoldPrice> goldPrices = dataService.GetGoldPrices(startDate, endDate).GetAwaiter().GetResult();
 
+
         if (goldPrices.Count == 0)
         {
             Console.WriteLine("No data found. Exiting.");
@@ -74,10 +75,12 @@ class Program
         List<GoldPrice> goldPrices2b = dataService.GetGoldPrices(startDate2b, endDate2b).GetAwaiter().GetResult();
 
         if (goldPrices2b.Count == 0)
+
         {
             Console.WriteLine("No data found. Exiting.");
             return;
         }
+
 
         Console.WriteLine($"Retrieved {goldPrices2b.Count} records. Ready for analysis.");
 
@@ -283,5 +286,6 @@ class Program
         {
             Console.WriteLine($"Price: {price.Price}, Date: {price.Date}");
         }
+
     }
 }
